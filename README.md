@@ -14,7 +14,8 @@ Place these files directly in the GitHub repository root (do not upload the pare
 - `database.py` — journal and state persistence
 - `requirements.txt` — Python dependencies
 - `render.yaml` — Render Blueprint configuration
-- `test_integration_fixes.py`, `test_database_integration.py` — tests
+- `test_integration_fixes.py`, `test_database_integration.py`, `test_option_snapshot.py` — tests
+- `CORRECTIONS.md` — correction list and verification status
 - `INTEGRATION_NOTES.md` — limitations and configuration notes
 
 ## Run locally
@@ -23,7 +24,7 @@ Use Python 3.12, create/activate a virtual environment, then:
 
 ```bash
 python -m pip install -r requirements.txt
-python -m unittest -v test_integration_fixes test_database_integration
+python -m unittest -v test_integration_fixes test_option_snapshot test_database_integration
 python main.py
 ```
 

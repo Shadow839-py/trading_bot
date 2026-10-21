@@ -1,0 +1,39 @@
+services:
+  - type: web
+    name: btc-paper-trading-dashboard
+    runtime: python
+    plan: starter
+    buildCommand: pip install -r requirements.txt
+    startCommand: python main.py
+    healthCheckPath: /api/health
+    autoDeploy: false
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.8
+      - key: PYTHONUNBUFFERED
+        value: "1"
+      - key: HOST
+        value: 0.0.0.0
+      - key: PORT
+        value: "10000"
+      - key: START_FEED
+        value: "1"
+      - key: FEED_EXCHANGE
+        value: deribit
+      - key: TRADING_SYMBOL
+        value: BTCUSDT
+      - key: DERIBIT_OPTION_POLL_SECONDS
+        value: "30"
+      - key: PAPER_ORDER_BTC
+        value: "0.001"
+      - key: ENABLE_STRATEGY_TRADING
+        value: "false"
+      # Configure WALL_STRIKES in the deployment dashboard with comma-separated
+      # BTC price levels near current spot. Leave strategy trading disabled until
+      # the wall tracker has been validated against real feed observations.
+      - key: DATABASE_URL
+        value: sqlite+aiosqlite:////var/data/trading.db
+    disk:
+      name: btc-paper-db
+      mountPath: /var/data
+      sizeGB: 1
